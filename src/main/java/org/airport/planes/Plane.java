@@ -1,5 +1,4 @@
 package org.airport.planes;
-import org.airport.exception.*;
 
 public abstract class Plane implements IPlane{
     protected String model;
@@ -14,39 +13,30 @@ public abstract class Plane implements IPlane{
         this.oxygen = oxygen;
     }
 
-    public boolean start() throws EngineException, FuelException, OxygenException{
-        try{
-            if(checkFuel() && checkEngine() && checkOxygen()){
-                return true;
-            }
-        }
-        catch (FuelException | EngineException | OxygenException e){
-            System.err.println(getClass() + " " + e.getMessage());
-            return false;
-        }
-        return false;
-    }
     public String getModel(){
         return this.model;
     }
 
-    protected boolean checkFuel() {
-        if (!this.fuel) {
-            throw new FuelException();
-        }
-        return true;
-    }
-    protected boolean checkEngine() {
-        if (!this.engine) {
-            throw new EngineException();
-        }
-        return true;
-    }
-    protected boolean checkOxygen() {
-        if (!this.oxygen) {
-            throw new OxygenException();
-        }
-        return true;
+    public boolean getFuelStatus(){
+        return this.fuel;
     }
 
+    public boolean getEngineStatus(){
+        return this.engine;
+    }
+    public boolean getOxygenStatus(){
+        return this.oxygen;
+    }
+
+    public void setFuelStatus(boolean fuel){
+        this.fuel = fuel;
+    }
+
+    public void setEngineStatus(boolean engine){
+        this.engine = engine;
+    }
+
+    public void setOxygenStatus(boolean oxygen){
+        this.oxygen = oxygen;
+    }
 }
